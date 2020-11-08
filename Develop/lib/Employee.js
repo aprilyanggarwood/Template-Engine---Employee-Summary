@@ -1,4 +1,5 @@
 // TODO: Write code to define and export the Employee class
+// use class declaration function to set up the super class with Employee
 class Employee {
   constructor(name, id, email) {
     this.name = name;

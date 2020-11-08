@@ -54,6 +54,7 @@ const extraQuestions = {
   },
 };
 
+// ES6 object distructing with {Mannager,Engineer,Intern}. Three properties are from three subclass modules
 const roles = {
   Manager,
   Engineer,
@@ -68,6 +69,7 @@ function init() {
       choices: ["Add new Employee", "Create Team Profile"],
       name: "menu",
     })
+    // ES6 object distructing with {menu}
     .then(({ menu }) => {
       if (menu === "Add new Employee") {
         inquirer.prompt(emplyeeQuestions).then((data) => {
@@ -75,7 +77,9 @@ function init() {
           id = data.id;
           email = data.email;
           role = data.role;
+          // ES6 object distructing with {extra}
           inquirer.prompt(extraQuestions[role]).then(({ extra }) => {
+            // new roles[role](paremters) = new Roles(paremters)；
             const newEmp = new roles[role](name, id, email, extra);
             engineeringTeamList.push(newEmp);
             console.log(`New ${role} added to team!`);
@@ -89,24 +93,26 @@ function init() {
 }
 
 function createTeam() {
+  // const render = require("./lib/htmlRenderer");
   const htmlString = render(engineeringTeamList);
-  fs.writeFile(outputPath, htmlString, (err) => console.log(err || "Success!"));
+  // fs.writeFile(filename, data, [encoding], [callback])
+  fs.writeFile("outputPath", htmlString, (err) =>
+    console.log(err || "Success!")
+  );
 }
 
 init();
 
-// function ValidateEmail(InputEmailText) {
-//   const emailValidFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-//   if (InputEmailText.value == emailValidFormat) {
-
-//     return true;
-//   } else {
-//     alert("Great! This is an invalid email address!");
-
-//     return false;
-//   }
-// }
-
+function ValidateEmail(InputEmailText) {
+  const emailValidFormat = new RegExp(/^.+@.+\.(com|net|edu)$/);
+  if (emailValidFormat.test(InputEmailText.value)) {
+    // return true;
+    console.log("Great! This is an invalid email address!");
+  } else {
+    return false;
+  }
+}
+console.log(ValidateEmail("aprilyang@hotmail.com"));
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
