@@ -10,7 +10,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-var engineeringTeamList = [];
+const engineeringTeamList = [];
+// const teamName = [];
 
 const emplyeeQuestions = [
   {
@@ -93,10 +94,19 @@ function init() {
 }
 
 function createTeam() {
+  // inquirer.prompt({
+  //   type: "input",
+  //   name: "teamname",
+  //   message: "What is your team's name?",
+  // }).then(teamname)=> {
+  //   teamname = teamNameData.teamname
+
+  // };
+
   // const render = require("./lib/htmlRenderer");
   const htmlString = render(engineeringTeamList);
   // fs.writeFile(filename, data, [encoding], [callback])
-  fs.writeFile("outputPath", htmlString, (err) =>
+  fs.writeFile("./output/team.html", htmlString, (err) =>
     console.log(err || "Success!")
   );
 }
