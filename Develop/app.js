@@ -11,7 +11,6 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 const engineeringTeamList = [];
-// const teamName = [];
 
 const emplyeeQuestions = [
   {
@@ -93,55 +92,35 @@ function init() {
     });
 }
 
+// user will
 function createTeam() {
-  // inquirer.prompt({
-  //   type: "input",
-  //   name: "teamname",
-  //   message: "What is your team's name?",
-  // }).then(teamname)=> {
-  //   teamname = teamNameData.teamname
-
-  // };
-
-  // const render = require("./lib/htmlRenderer");
-  const htmlString = render(engineeringTeamList);
-  // fs.writeFile(filename, data, [encoding], [callback])
-  fs.writeFile("./output/team.html", htmlString, (err) =>
-    console.log(err || "Success!")
-  );
+  // user can create a team name before or after adding employees
+  inquirer
+    .prompt({
+      type: "input",
+      name: "teamname",
+      message: "What is your team's name?",
+    })
+    .then((answer) => {
+      const teamname = answer.teamname.toLowerCase().trim();
+      // const render = require("./lib/htmlRenderer");
+      const htmlString = render(engineeringTeamList);
+      // fs.writeFile(filename, data, [encoding], [callback])
+      // html file will be gerenated with the team name which was created by user response input.
+      fs.writeFile(`./output/${teamname}.html`, htmlString, (err) => {
+        console.log(err || "Success!");
+        init();
+      });
+    });
 }
-
 init();
-
-function ValidateEmail(InputEmailText) {
-  const emailValidFormat = new RegExp(/^.+@.+\.(com|net|edu)$/);
-  if (emailValidFormat.test(InputEmailText.value)) {
-    // return true;
-    console.log("Great! This is an invalid email address!");
-  } else {
-    return false;
-  }
-}
-console.log(ValidateEmail("aprilyang@hotmail.com"));
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+// function ValidataEmail(InputEmailText) {
+//   const emailValidFormat = new RegExp(/^.+@.+\.(com|net|edu)$/);
+//   if (emailValidFormat.test(InputEmailText.value)) {
+//     console.log("Great! This is an valid email address!");
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+// console.log(ValidataEmail("aprilyang@hotmail.com"));
