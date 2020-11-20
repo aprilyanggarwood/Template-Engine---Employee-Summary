@@ -41,7 +41,7 @@ One supper `class`: Employee, and three sub `classes`: Manager, Engineer, Intern
 
 ## Screenshot
 
-![application-screenshot](./Assets/application-screenshot.png)
+![application-screenshot](./Assets/application-screenshot-resize.png)
 
 ## Demo
 
